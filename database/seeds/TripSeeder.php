@@ -15,15 +15,17 @@ class TripSeeder extends Seeder
     public function run()
     {
         $stations = Station::all();
+        $bus = Bus::first();
 
-        if ($stations->count() > 1) {
+        if ($stations->count() > 1 && $bus) {
             $trip = Trip::create([
                 'from' => $stations->first()->id,
                 'to' => $stations->last()->id,
-                'bus_id' => Bus::first()->id,
+                'bus_id' => $bus->id,
             ]);
 
             $trip->stations()->saveMany($stations);
+            $trip->syncSeatsAvailability();
         }
     }
 }

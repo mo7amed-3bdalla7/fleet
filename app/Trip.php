@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Trip extends Model
 {
@@ -42,6 +43,28 @@ class Trip extends Model
     public function bus()
     {
         return $this->belongsTo(Bus::class);
+    }
+
+    public function syncSeatsAvailability()
+    {
+        if ($this->bus) {
+
+            $availabilities = [];
+            $this->bus->seats->each(function ($seat) use (&$availabilities){
+                $availability = new Availability();
+                $availability->station_id = 0;
+                $availability->seat_id = $seat->id;
+                $availabilities[] = $availability;
+            });
+
+            $this->availabilities()->saveMany($availabilities);
+        }
+
+    }
+
+    public function availabilities()
+    {
+        return $this->hasMany(Availability::class);
     }
 
 }

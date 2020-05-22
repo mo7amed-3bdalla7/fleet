@@ -41,7 +41,7 @@ class Trip extends Model
 
     public function bus()
     {
-        return $this->hasOne(Bus::class);
+        return $this->belongsTo(Bus::class);
     }
 
 }

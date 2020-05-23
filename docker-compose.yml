@@ -8,10 +8,10 @@ services:
     image: mysql:5.7.29
     container_name: mysql
     environment:
-      MYSQL_DATABASE: fleet
-      MYSQL_USER: fleet
-      MYSQL_ROOT_PASSWORD: fleet
-      MYSQL_PASSWORD: fleet
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     networks:
       - app
 

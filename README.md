@@ -25,3 +25,6 @@ Api endpoints documentation i add additional trips and stations endpoints to hel
 
 * You can check documentation from [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/cb60e3b9b785d4f88f9a)
 
+### Third Step
+
+You can run app tests using `docker-compose run composer test`.

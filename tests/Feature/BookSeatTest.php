@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Trip;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

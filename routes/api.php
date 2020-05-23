@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('trip-available-seats/{trip}', 'Api\\AvailableSeatController@show');
 Route::post('book-seats', 'Api\\BookSeatController@store');
+
+
+Route::resource('stations', 'Api\\StationController')->only('index');
+Route::resource('trips', 'Api\\TripController')->only('index');

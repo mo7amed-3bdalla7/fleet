@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('trip-available-seats/{trip}', 'Api\\AvailableSeatController@show')
-;
+Route::get('trip-available-seats/{trip}', 'Api\\AvailableSeatController@show');
+Route::post('book-seats', 'Api\\BookSeatController@store');

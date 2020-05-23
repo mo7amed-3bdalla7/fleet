@@ -14,10 +14,13 @@ class TicketSeeder extends Seeder
     public function run()
     {
         $trip = Trip::first();
+        $route = $trip->routes()->first();
+        $seat = $trip->bus->seats()->first();
+        $route->syncSeatsAvailability($seat->id);
 
         Ticket::create([
-            'route_id' => $trip->routes()->first()->id,
-            'seat_id' => $trip->bus->seats()->first()->id
+            'route_id' => $route->id,
+            'seat_id' => $seat->id
         ]);
     }
 }

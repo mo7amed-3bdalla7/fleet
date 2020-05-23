@@ -22,21 +22,17 @@ class BookSeatController extends Controller
             ->where('to', $request->end)
             ->first();
 
-        $availability = Availability::bestSeat($route->trip_id, $request->start, $request->end);
+        $seat = Availability::bestAvailableSeat($route->trip_id, $request->start, $request->end);
 
-        if ($availability) {
+        if ($seat) {
             try {
                 DB::beginTransaction();
 
-                $route->syncSeatsAvailability($availability->seat_id);
+                $route->syncSeatsAvailability($seat->id);
                 $ticket = Ticket::create([
                     'route_id' => $route->id,
-                    'seat_id' => $availability->seat_id,
+                    'seat_id' => $seat->id,
                 ]);
-
-                if (!$availability->station_id) {
-                    $availability->delete();
-                }
 
                 DB::commit();
 
